@@ -1,0 +1,69 @@
+print('-' * 30)
+print('CATÁLOGO'.center(30))
+print('-' * 30)
+print(f"{'Produto':<25}{'Preço':>5}")
+print('-' * 30)
+print(f"{'Chocolate ao Leite':<25} R$ 15,00")
+print(f"{'Chocolate Meio Amargo':<25} R$ 18,00")
+print(f"{'Chocolate Branco':<25} R$ 12,00")
+print(f"{'Frutas Vermelhas':<25} R$ 20,00")
+print(f"{'Banana com Nutella':<25} R$ 25,00")
+print('-' * 30)
+
+produtos = [
+    {"nome": "Chocolate ao Leite", "preco": 15.00},
+    {"nome": "Chocolate Meio Amargo", "preco": 18.00},
+    {"nome": "Chocolate Branco", "preco": 12.00},
+    {"nome": "Frutas Vermelhas", "preco": 20.00},
+    {"nome": "Banana com Nutella", "preco": 25.00},]
+
+
+def calculo():
+    total_original = 0
+    total_quantidade = 0
+    while True:
+        item = str(input('Digite o produto que deseja adicionar no carrinho: ')).strip().lower()
+        quant = int(input('Digite a quantidade que deseja adicionar: '))
+        produto_encontrado = False
+        for produto in produtos:
+            if produto['nome'].lower() == item:
+                produto_encontrado = True
+                valor_produto = produto['preco'] * quant
+                total_original += valor_produto
+                total_quantidade += quant
+                print('-' * 30)
+                print(f"Produto: {produto['nome']}")
+                print(f"Quantidade: {quant}")
+                print(f"Subtotal: R$ {valor_produto:.2f}")
+                print('-' * 30)
+                break
+        if not produto_encontrado:
+            print("Produto não encontrado no catálogo. Tente novamente.")
+
+
+        continuar = input("Deseja adicionar outro produto? (s/n): ").strip().lower()
+        if continuar != 's':
+            break
+
+
+    if total_quantidade < 10:
+        desconto = 0.05
+    elif 10 <= total_quantidade <= 20:
+        desconto = 0.10
+    else:
+        desconto = 0.15
+
+    total_desconto = total_original * desconto
+    total_final = total_original - total_desconto
+
+    print('-' * 30)
+    print('RESUMO DA COMPRA'.center(30))
+    print('-' * 30)
+    print(f"Quantidade Total de Produtos: {total_quantidade}")
+    print(f"Valor Original: R$ {total_original:.2f}")
+    print(f"Desconto Aplicado ({int(desconto * 100)}%): R$ {total_desconto:.2f}")
+    print(f"Total Final: R$ {total_final:.2f}")
+    print('-' * 30)
+
+
+calculo()
